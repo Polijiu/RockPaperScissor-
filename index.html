@@ -9,13 +9,14 @@
 <script>
     function firstUpper(playerSelection){
         playerSelection = playerSelection.toLowerCase();
-        playerSelection = playerSelection.charAt[0].toUpperCase();
+        playerSelection = playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1);
         return playerSelection;
     }
 
     function getComputerChoice (){
-        const getComputerChoice = ['Rock' , 'Paper' , 'Scissor'];
-        getComputerChoice = getComputerChoice.random();
+        let getComputerChoice = ['Rock' , 'Paper' , 'Scissor'];
+        let computerChoice = Math.floor(Math.random() * getComputerChoice.length);
+        getComputerChoice = getComputerChoice[computerChoice];
         return getComputerChoice;
     }
 
@@ -24,7 +25,7 @@
         playerGameResult = 'Tie';
     }
     else if 
-    (playerSelection === 'Rock' && computerSelection === 'Paper' ||
+    (playerSelection === 'Rock' && computerSelection === 'Scissor' ||
     playerSelection === 'Paper' && computerSelection === 'Rock' ||
     playerSelection === 'Scissor' && computerSelection === 'Paper') {
         playerGameResult = 'Win';
@@ -32,29 +33,68 @@
     else {
         playerGameResult = 'Lose';
     }
+    return playerGameResult;
 }
 
+function printResult(computerSelection, playerSelection){
+    if (playerGameResult === 'Win'){
+            console.log('You ' + playerGameResult + '! ' + playerSelection + ' beats ' + computerSelection + '. ' + 'Current player score : ' + playerWins + ', ' + 'current computer score : ' + computerWins + '.');
+        }
+        else if (playerGameResult === 'Tie'){
+            console.log('It\'s a tie! Current player score : ' + playerWins + ', ' + 'current computer score : ' + computerWins + '.');
+        }
+        else {
+            console.log('You ' + playerGameResult + '! ' + computerSelection + ' beats ' + playerSelection + '. ' + 'Current player score : ' + playerWins + ', ' + 'current computer score : ' + computerWins + '.');
+        }
+}
+
+function playGame (){
+    if (playerWins === 3 && playerWins != computerWins){
+        console.log('You won the game of Best of 5!')
+        continueGame = false;
+    }
+    else if (computerWins === 3 && computerWins != playerWins){
+        console.log('You lost the game of Best of 5!')
+        continueGame = false;
+    }
+    else if (playerWins === 5 && computerWins === 5) {
+        console.log('You both tied on Best of 5! What a coincidance!')
+        continueGame = false;
+    }
+    return continueGame;
+}
+
+let playerWins = 0;     //count wins
+let computerWins = 0;
+let continueGame = true;
+
+while (continueGame === true){
 let input = false;
 let playerSelection = prompt('Please type Rock, Paper or Scissor.');    //get player input 
-playerSelection = firstUpper(playerSelection);  //change input to first letter Upper case
-
 
 while (input === false){    //if user input not correct, keep looping until it's answer is correct
-    if (playerSelection != 'Rock' || 'Paper' || 'Scissor'){
-        playerSelection = prompt('Please type Rock, Paper or Scissor correctly.');
-        playerSelection = firstUpper(playerSelection);
+    playerSelection = firstUpper(playerSelection);  //change input to first letter Upper case
+        if (playerSelection === 'Rock' || playerSelection ==='Paper' || playerSelection === 'Scissor'){
+            input = true;
+            }
+        else {
+            playerSelection = prompt('Please type Rock, Paper or Scissor only.');
         }
-    else {
-        input = true;
-    }
     }
 
-const computerChoice = getComputerChoice; //get computer's answer
+const computerSelection = getComputerChoice(); //get computer's answer
 let playerGameResult = compareResult(computerSelection , playerSelection);
 
+if (playerGameResult === 'Win'){    //count wins and losses
+    playerWins++;
+}
+else if (playerGameResult === 'Lose'){
+    computerWins++;
+}
 
-
-
+printResult(computerSelection, playerSelection);
+continueGame = playGame();
+}
 
 </script>
 </body>
