@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    function firstUpper(playerSelection){
+        playerSelection = playerSelection.toLowerCase();
+        playerSelection = playerSelection.charAt[0].toUpperCase();
+        return playerSelection;
+    }
+
+    function getComputerChoice (){
+        const getComputerChoice = ['Rock' , 'Paper' , 'Scissor'];
+        getComputerChoice = getComputerChoice.random();
+        return getComputerChoice;
+    }
+
+    function compareResult(computerSelection, playerSelection){ //compare computerSelection and playerSelection
+    if (computerSelection === playerSelection){ 
+        playerGameResult = 'Tie';
+    }
+    else if 
+    (playerSelection === 'Rock' && computerSelection === 'Paper' ||
+    playerSelection === 'Paper' && computerSelection === 'Rock' ||
+    playerSelection === 'Scissor' && computerSelection === 'Paper') {
+        playerGameResult = 'Win';
+    }
+    else {
+        playerGameResult = 'Lose';
+    }
+}
+
+let input = false;
+let playerSelection = prompt('Please type Rock, Paper or Scissor.');    //get player input 
+playerSelection = firstUpper(playerSelection);  //change input to first letter Upper case
+
+
+while (input === false){    //if user input not correct, keep looping until it's answer is correct
+    if (playerSelection != 'Rock' || 'Paper' || 'Scissor'){
+        playerSelection = prompt('Please type Rock, Paper or Scissor correctly.');
+        playerSelection = firstUpper(playerSelection);
+        }
+    else {
+        input = true;
+    }
+    }
+
+const computerChoice = getComputerChoice; //get computer's answer
+let playerGameResult = compareResult(computerSelection , playerSelection);
+
+
+
+
+
+</script>
+</body>
+</html>
